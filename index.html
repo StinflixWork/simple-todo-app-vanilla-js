@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang='uk-UA'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href='./src/styles/global.css'>
+    <title>Simple To-Do App | Vanilla JS</title>
+</head>
+<body>
+<div class='app'>
+    <header class='header'>
+        <h1 class='logo'>Simple To-Do App</h1>
+    </header>
+    <main class='page'>
+        <section class='page__container'>
+            <div class='tools'>
+                <label class='tools__note-title'>
+                    <input type="text" name="note-title" id="note-title-field" class="input" placeholder="What do you need to do?" max="120" />
+                </label>
+                <button class='button' id='add-note'>
+                    <img src="./src/assets/icons/plus.svg" alt="add new note">
+                </button>
+            </div>
+            <ul class='notes' id='notes-list'></ul>
+        </section>
+    </main>
+</div>
+<script src='./src/scripts/main.js' type='module'></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-export class LocalStorageService {
+export class StorageService {
   saveItem(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   }

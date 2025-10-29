@@ -1,4 +1,4 @@
-export class EventManager {
+export class EventEmitter {
   #listeners = [];
 
   subscribe(listener) {

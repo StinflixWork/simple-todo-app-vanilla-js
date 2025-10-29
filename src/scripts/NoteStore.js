@@ -1,12 +1,12 @@
-import { EventManager } from './eventManager.js'
-import { LocalStorageService } from './localStorageService.js'
+import { EventEmitter } from './EventEmitter.js'
+import { StorageService } from './StorageService.js'
 
-export class NoteService {
+export class NoteStore {
   #notes = [];
 
   constructor() {
-    this.eventManager = new EventManager();
-    this.localStorageService = new LocalStorageService();
+    this.eventManager = new EventEmitter();
+    this.localStorageService = new StorageService();
     this.#notes = this.localStorageService.getItem('notes');
   }
 

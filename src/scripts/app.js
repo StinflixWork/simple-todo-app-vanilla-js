@@ -7,13 +7,16 @@ function app() {
 
   noteView.renderNotes()
 
-  noteStore.eventManager.subscribe(noteView)
+  noteStore.eventManager.subscribe('*', noteView)
 
   const noteTitleField = document.getElementById('note-title-field')
   const noteAddButton = document.getElementById('add-note')
 
   noteAddButton.addEventListener('click', (e) => {
     const titleNoteValue = noteTitleField.value;
+
+    if (!titleNoteValue.trim()) return;
+
     noteStore.createNote({id: Date.now(), title: titleNoteValue})
     noteTitleField.value = ''
   })

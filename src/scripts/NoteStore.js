@@ -13,7 +13,7 @@ export class NoteStore {
   createNote(note) {
     this.#notes.push(note);
     this.localStorageService.saveItem('notes', this.#notes);
-    this.eventManager.notify(this.#notes)
+    this.eventManager.notify('create', this.#notes)
   }
 
   getAllNotes() {

@@ -1,27 +1,44 @@
 export class EventEmitter {
-  #listeners = [];
+  #listeners = new Map();
 
-  subscribe(listener) {
-    const isExist = this.#listeners.includes(listener)
-    if (isExist) {
-      return console.log('Listener already exists');
+  subscribe(event, listener) {
+    if (!this.#listeners.has(event)) {
+      this.#listeners.set(event, [])
     }
 
-    this.#listeners.push(listener);
+    const listeners = this.#listeners.get(event);
+    if (listeners.includes(listener)) return;
+
+    listeners.push(listener)
   }
 
-  unSubscribe(listener) {
-    const listenerIndex = this.#listeners.indexOf(listener);
-    if (listenerIndex === -1) {
-      return console.log('Nonexistent listener');
+  unSubscribe(event, listener) {
+    if (!this.#listeners.has(event)) return;
+
+    const listeners = this.#listeners.get(event)
+
+    const listenerIndex = listeners.indexOf(listener);
+    if (listenerIndex === -1) return;
+
+    listeners.splice(listenerIndex, 1);
+
+    if (listeners.length === 0) {
+      this.#listeners.delete(event)
     }
-
-    this.#listeners.splice(listenerIndex, 1);
   }
 
-  notify(data) {
-    for (const listener of this.#listeners) {
+  notify(event, data) {
+    const listeners = this.#listeners.get(event) || [];
+    const allListeners = this.#listeners.get('*') || [];
+
+    if (!listeners?.length && !allListeners?.length) return;
+
+    for (const listener of [...listeners, ...allListeners]) {
       listener.update(data);
     }
+  }
+
+  clear() {
+    this.#listeners.clear()
   }
 }

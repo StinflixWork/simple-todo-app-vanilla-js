@@ -1,4 +1,4 @@
-import {StorageService} from "./StorageService";
+import { StorageService } from "./StorageService.js";
 
 export class NoteView {
   #notes = [];

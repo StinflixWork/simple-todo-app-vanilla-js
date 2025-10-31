@@ -1,5 +1,5 @@
 import { StorageService } from "./StorageService.js";
-import {escapeHTML} from "./utils/escapeHtml.js";
+import { escapeHTML } from "./utils/escapeHtml.js";
 
 export class NoteView {
   #notes = [];

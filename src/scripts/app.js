@@ -1,5 +1,5 @@
-import {NoteStore} from "./NoteStore.js";
-import {NoteView} from "./NoteView.js";
+import { NoteStore } from "./NoteStore.js";
+import { NoteView } from "./NoteView.js";
 
 function app() {
   const noteStore = new NoteStore();
@@ -13,13 +13,20 @@ function app() {
   const noteTitleField = document.getElementById('note-title-field')
   const noteAddButton = document.getElementById('add-note')
 
-  noteAddButton.addEventListener('click', (e) => {
+  function addNewNote(e) {
     const titleNoteValue = noteTitleField.value;
 
     if (!titleNoteValue.trim()) return;
 
     noteStore.createNote({id: Date.now(), title: titleNoteValue})
     noteTitleField.value = ''
+  }
+
+  noteAddButton.addEventListener('click', addNewNote)
+  noteTitleField.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+      addNewNote(e)
+    }
   })
 
   notesList.addEventListener('click', (e) => {

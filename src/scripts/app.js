@@ -45,8 +45,6 @@ function app() {
       noteElement.addEventListener('transitionend', (e) => {
         noteStore.deleteNote(noteId);
       }, {once: true})
-
-      console.log(noteElement)
     }
 
     if (selectField) {

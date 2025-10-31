@@ -72,10 +72,51 @@ body {
 
 .note {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-block: 16px;
 
     font-size: 20px;
     font-weight: 500;
+
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.note.removing {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.note:not(:last-child) {
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.note__action {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    line-height: 1;
+    border-radius: 4px;
+}
+
+.note__action img {
+    width: 24px;
+    height: 24px;
+}
+
+.note__action:hover {
+    background-color: #f6f6f6;
+}
+
+.note__action:active {
+    background-color: #eee;
+}
+
+.empty {
+    font-size: 20px;
+    text-align: center;
+    color: #6C757D;
 }
 
 /* --- COMPONENTS --- */

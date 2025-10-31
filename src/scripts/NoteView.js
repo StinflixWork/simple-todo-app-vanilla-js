@@ -22,7 +22,14 @@ export class NoteView {
     }
 
     this.#noteListElement.innerHTML = this.#notes
-      .map(note => `<li class="note">${note.title}</li>`)
+      .map(note => `<li class="note" data-note-id=${note.id}>
+        <p>${note.title}</p>
+        <div class='note__actions'>
+            <button class='note__action'>
+                <img src='./src/assets/icons/trash.svg' alt="delete note">
+            </button>
+        </div>
+      </li>`)
       .join('');
   }
 }

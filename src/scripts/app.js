@@ -1,5 +1,5 @@
-import { NoteStore } from "./NoteStore.js";
-import { NoteView } from "./NoteView.js";
+import {NoteStore} from "./NoteStore.js";
+import {NoteView} from "./NoteView.js";
 
 function app() {
   const noteStore = new NoteStore();
@@ -9,6 +9,7 @@ function app() {
 
   noteStore.eventManager.subscribe('*', noteView)
 
+  const notesList = document.getElementById('notes-list')
   const noteTitleField = document.getElementById('note-title-field')
   const noteAddButton = document.getElementById('add-note')
 
@@ -19,6 +20,25 @@ function app() {
 
     noteStore.createNote({id: Date.now(), title: titleNoteValue})
     noteTitleField.value = ''
+  })
+
+  notesList.addEventListener('click', (e) => {
+    const deleteButton = e.target.closest('.note__action');
+
+    if (deleteButton) {
+      const noteElement = e.target.closest('.note');
+      if (!noteElement) return;
+
+      const noteId = +noteElement.dataset.noteId;
+
+      noteElement.classList.add('removing')
+
+      noteElement.addEventListener('transitionend', (e) => {
+        noteStore.deleteNote(noteId);
+      }, {once: true})
+
+      console.log(noteElement)
+    }
   })
 }
 

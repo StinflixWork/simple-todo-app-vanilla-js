@@ -1,5 +1,5 @@
-import { StorageService } from "./StorageService.js";
-import { escapeHTML } from "./utils/escapeHtml.js";
+import {StorageService} from './StorageService.js';
+import {escapeHTML} from './utils/escapeHtml.js';
 
 export class NoteView {
   #notes = [];
@@ -18,16 +18,22 @@ export class NoteView {
 
   renderNotes() {
     if (this.#notes.length === 0) {
-      this.#noteListElement.innerHTML = '<li class="empty">Немає нотаток</li>';
+      this.#noteListElement.innerHTML = `<li class='empty'>Немає нотаток</li>`;
       return;
     }
 
     this.#noteListElement.innerHTML = this.#notes
-      .map(note => `<li class="note" data-note-id=${note.id}>
-        <p>${escapeHTML(note.title)}</p>
+      .map(note => `<li class='note' data-note-id=${note.id}>
+        <div class='note__title'>
+            <label class="checkbox">
+                <input type="checkbox" class="note__select-note"  />
+                <span class="checkmark"></span>
+            </label>
+            <p>${escapeHTML(note.title)}</p>
+        </div>
         <div class='note__actions'>
             <button class='note__action'>
-                <img src='./src/assets/icons/trash.svg' alt="delete note">
+                <img src='./src/assets/icons/trash.svg' alt='delete note'>
             </button>
         </div>
       </li>`)

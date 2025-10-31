@@ -1,5 +1,5 @@
-import { NoteStore } from "./NoteStore.js";
-import { NoteView } from "./NoteView.js";
+import {NoteStore} from "./NoteStore.js";
+import {NoteView} from "./NoteView.js";
 
 function app() {
   const noteStore = new NoteStore();
@@ -23,6 +23,7 @@ function app() {
   }
 
   noteAddButton.addEventListener('click', addNewNote)
+
   noteTitleField.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       addNewNote(e)
@@ -30,14 +31,15 @@ function app() {
   })
 
   notesList.addEventListener('click', (e) => {
+    const noteElement = e.target.closest('.note');
+    const selectField = e.target.closest('.note__select-note');
     const deleteButton = e.target.closest('.note__action');
 
+    if (!noteElement) return;
+
+    const noteId = +noteElement.dataset.noteId;
+
     if (deleteButton) {
-      const noteElement = e.target.closest('.note');
-      if (!noteElement) return;
-
-      const noteId = +noteElement.dataset.noteId;
-
       noteElement.classList.add('removing')
 
       noteElement.addEventListener('transitionend', (e) => {
@@ -45,6 +47,14 @@ function app() {
       }, {once: true})
 
       console.log(noteElement)
+    }
+
+    if (selectField) {
+      if (selectField.checked) {
+        noteElement.classList.add('done')
+      } else {
+        noteElement.classList.remove('done')
+      }
     }
   })
 }

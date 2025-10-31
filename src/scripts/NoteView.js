@@ -1,4 +1,5 @@
 import { StorageService } from "./StorageService.js";
+import {escapeHTML} from "./utils/escapeHtml.js";
 
 export class NoteView {
   #notes = [];
@@ -23,7 +24,7 @@ export class NoteView {
 
     this.#noteListElement.innerHTML = this.#notes
       .map(note => `<li class="note" data-note-id=${note.id}>
-        <p>${note.title}</p>
+        <p>${escapeHTML(note.title)}</p>
         <div class='note__actions'>
             <button class='note__action'>
                 <img src='./src/assets/icons/trash.svg' alt="delete note">

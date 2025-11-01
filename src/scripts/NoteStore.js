@@ -25,6 +25,17 @@ export class NoteStore {
     this.#saveChange('delete')
   }
 
+  toggleNoteStatus(id, isDone) {
+    const noteIndex = this.#notes.findIndex(note => note.id === id)
+    if (noteIndex === -1) return;
+
+    const updatedNotes = [...this.#notes]
+    updatedNotes[noteIndex].isDone = isDone;
+    this.#notes = [...updatedNotes];
+
+    this.#saveChange('update')
+  }
+
   getAllNotes() {
     return [...this.#notes];
   }

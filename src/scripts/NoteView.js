@@ -23,10 +23,10 @@ export class NoteView {
     }
 
     this.#noteListElement.innerHTML = this.#notes
-      .map(note => `<li class='note' data-note-id=${note.id}>
+      .map(note => `<li class='note ${note.isDone ? 'done' : ''}' data-note-id=${note.id}>
         <div class='note__title'>
             <label class="checkbox">
-                <input type="checkbox" class="note__select-note"  />
+                <input type="checkbox" class="note__select-note" ${note.isDone ? 'checked' : ''}  />
                 <span class="checkmark"></span>
             </label>
             <p>${escapeHTML(note.title)}</p>

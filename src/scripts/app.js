@@ -18,7 +18,7 @@ function app() {
 
     if (!titleNoteValue.trim()) return;
 
-    noteStore.createNote({id: Date.now(), title: titleNoteValue})
+    noteStore.createNote({id: Date.now(), title: titleNoteValue, isDone: false})
     noteTitleField.value = ''
   }
 
@@ -48,11 +48,15 @@ function app() {
     }
 
     if (selectField) {
-      if (selectField.checked) {
+      const isDoneNote = selectField.checked;
+
+      if (isDoneNote) {
         noteElement.classList.add('done')
       } else {
         noteElement.classList.remove('done')
       }
+
+      noteStore.toggleNoteStatus(noteId, isDoneNote)
     }
   })
 }

@@ -18,7 +18,10 @@ export class NoteView {
 
   renderNotes() {
     if (this.#notes.length === 0) {
-      this.#noteListElement.innerHTML = `<li class='empty'>Немає нотаток</li>`;
+      this.#noteListElement.innerHTML = `<li class='empty'>
+       <img src='./src/assets/icons/bg-empty.svg' alt='not found'>
+       <p>Немає нотаток</p>
+      </li>`;
       return;
     }
 

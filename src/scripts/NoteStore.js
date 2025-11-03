@@ -50,7 +50,7 @@ export class NoteStore {
         filteredNotes = this.#notes.filter(note => !note.isDone)
         break;
       default:
-        filteredNotes = this.#notes;
+        filteredNotes = [...this.#notes];
         break;
     }
 

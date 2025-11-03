@@ -3,6 +3,7 @@ import { StorageService } from './StorageService.js'
 
 export class NoteStore {
   #notes = [];
+  #currentFilter = 'all'
 
   constructor() {
     this.eventManager = new EventEmitter();
@@ -12,7 +13,8 @@ export class NoteStore {
 
   #saveChange(event) {
     this.localStorageService.saveItem('notes', this.#notes);
-    this.eventManager.notify(event, this.#notes)
+    this.eventManager.notify(event, this.#notes);
+    this.filterNotes(this.#currentFilter);
   }
 
   createNote(note) {
@@ -36,7 +38,22 @@ export class NoteStore {
     this.#saveChange('update')
   }
 
-  getAllNotes() {
-    return [...this.#notes];
+  filterNotes(filter) {
+    this.#currentFilter = filter;
+    let filteredNotes;
+
+    switch (filter) {
+      case 'done':
+        filteredNotes = this.#notes.filter(note => note.isDone)
+        break;
+      case 'active':
+        filteredNotes = this.#notes.filter(note => !note.isDone)
+        break;
+      default:
+        filteredNotes = this.#notes;
+        break;
+    }
+
+    this.eventManager.notify('filtered', filteredNotes)
   }
 }

@@ -15,11 +15,21 @@
         <section class='page__container'>
             <div class='tools'>
                 <label class='tools__note-title'>
-                    <input type="text" name="note-title" id="note-title-field" class="input" placeholder="What do you need to do?" max="120" />
+                    <input type='text' name='note-title' id='note-title-field' class='input' placeholder='What do you need to do?' max='120' />
                 </label>
-                <button class='button' id='add-note'>
-                    <img src="./src/assets/icons/plus.svg" alt="add new note">
-                </button>
+                <div class='tools__actions'>
+                    <label class='select'>
+                        <select class='select__field' id='filter-note'>
+                            <option value='all'>All</option>
+                            <option value='done'>Done</option>
+                            <option value='active'>Active</option>
+                        </select>
+                        <img src="./src/assets/icons/chevron-top.svg" alt="chevron top" class='select__icon' />
+                    </label>
+                    <button class='button' id='add-note'>
+                        <img src='./src/assets/icons/plus.svg' alt='add new note'>
+                    </button>
+                </div>
             </div>
             <ul class='notes' id='notes-list'></ul>
         </section>

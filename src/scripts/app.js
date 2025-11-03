@@ -1,17 +1,25 @@
-import {NoteStore} from "./NoteStore.js";
-import {NoteView} from "./NoteView.js";
+import { NoteStore } from "./NoteStore.js";
+import { NoteView } from "./NoteView.js";
+import { toggleSelectArrowAnimation } from './animate/toggleSelectArrowAnimation.js'
 
 function app() {
   const noteStore = new NoteStore();
   const noteView = new NoteView();
 
   noteView.renderNotes()
+  toggleSelectArrowAnimation()
 
   noteStore.eventManager.subscribe('*', noteView)
 
   const notesList = document.getElementById('notes-list')
   const noteTitleField = document.getElementById('note-title-field')
   const noteAddButton = document.getElementById('add-note')
+  const selectFilter = document.getElementById('filter-note')
+
+  selectFilter.addEventListener('change', (e) => {
+    const selectedFilter = e.target.value;
+    noteStore.filterNotes(selectedFilter)
+  })
 
   function addNewNote(e) {
     const titleNoteValue = noteTitleField.value;
